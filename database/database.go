@@ -30,6 +30,6 @@ func (c *Connection) ReadEnvs() error {
 	c.Username = os.Getenv("DB_USERNAME")
 	c.Password = os.Getenv("DB_PASSWORD")
 	c.Host = os.Getenv("DB_HOST")
-	c.SSLMode = os.Getenv("DB_SSL")
+	c.SSLMode = os.Getenv("DB_SSL ")
 	return nil
 }
