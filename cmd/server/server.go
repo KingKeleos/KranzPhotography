@@ -7,6 +7,7 @@ import (
 )
 
 func main() {
+	slog.Info("starting backend")
 	err := database.Setup()
 	if err != nil {
 		slog.Error("migrating the database", "error", err)
