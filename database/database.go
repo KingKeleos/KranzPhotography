@@ -9,6 +9,9 @@ import (
 	_ "github.com/lib/pq"
 )
 
+// Set up a variable to use globally
+var Conn *sql.DB
+
 type Connection struct {
 	Username string
 	Password string
@@ -16,14 +19,15 @@ type Connection struct {
 	SSLMode  string
 }
 
-func (c *Connection) Connect() (*sql.DB, error) {
+func (c *Connection) Connect() error {
 	connection := fmt.Sprintf("postgres://%s:%s@%s:5432?sslmode=%s", c.Username, c.Password, c.Host, c.SSLMode)
 	conn, err := sql.Open("postgres", connection)
 	if err != nil {
 		slog.Error("connecting to the database", "Error", err)
-		return nil, err
+		return err
 	}
-	return conn, nil
+	Conn = conn
+	return nil
 }
 
 func (c *Connection) ReadEnvs() error {

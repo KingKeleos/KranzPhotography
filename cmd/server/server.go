@@ -15,9 +15,8 @@ func main() {
 	slog.Info("successfully migrated the database")
 	c := database.Connection{}
 	c.ReadEnvs()
-	conn, err := c.Connect()
+	err = c.Connect()
 	if err != nil {
 		slog.Error("creating a connection to the database")
 	}
-	conn.Close()
 }
