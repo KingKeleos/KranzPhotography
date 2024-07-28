@@ -6,6 +6,7 @@ import (
 	_ "github.com/golang-migrate/migrate/v4/source/file"
 )
 
+// Setup will add the migration files to the database
 func Setup() (err error) {
 	m, err := migrate.New(
 		"file:database/migrations/",
@@ -14,5 +15,6 @@ func Setup() (err error) {
 		return
 	}
 	err = m.Up()
+	m.Close()
 	return
 }
